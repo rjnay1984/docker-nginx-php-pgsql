@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    build: ./.docker/nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/app
+  php:
+    image: php
+    build: ./.docker/php
+    ports: 
+      - 9000:9000
+    volumes: 
+      - ./app:/app
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment: 
+      POSTGRES_DB: docker_example
+      POSTGRES_USER: docker_user
+      POSTGRES_PASSWORD: SupMyDudes
